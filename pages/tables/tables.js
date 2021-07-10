@@ -8,10 +8,10 @@ const DynamicComponentNoSSR = dynamic(
 
 function Tables() {
   return (
-  <>
-    <DynamicComponentNoSSR />
-  </>
-    )
+    <>
+      <DynamicComponentNoSSR />
+    </>
+  );
 }
 
 export default Tables;

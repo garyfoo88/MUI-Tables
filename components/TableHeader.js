@@ -22,20 +22,38 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 
 function TableHeader(props) {
+  const {
+    classes,
+    onSelectAllClick,
+    order,
+    orderBy,
+    numSelected,
+    rowCount,
+    onRequestSort,
+    headerData,
+  } = props;
+
   return (
-      <TableHead>
-          <TableRow>
-              <TableCell padding="checkbox">
-                <Checkbox inputProps={{'aria-label': 'select all' }} />
-              </TableCell>
-              <TableCell>
-                  <TableSortLabel>
-                      haha
-                  </TableSortLabel>
-              </TableCell>
-          </TableRow>
-      </TableHead>
-  )
+    <TableHead>
+      <TableRow>
+        <TableCell padding="checkbox">
+          <Checkbox
+            onChange={onSelectAllClick}
+            checked={rowCount > 0 && numSelected === rowCount}
+            indeterminate={numSelected > 0 && numSelected < rowCount}
+            inputProps={{ "aria-label": "select all" }}
+          />
+        </TableCell>
+        {headerData.map((header, index) => {
+          return (
+            <TableCell key={index + 1}>
+              <TableSortLabel>{header}</TableSortLabel>
+            </TableCell>
+          );
+        })}
+      </TableRow>
+    </TableHead>
+  );
 }
 
 export default TableHeader;
