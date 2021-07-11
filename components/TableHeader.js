@@ -46,8 +46,26 @@ function TableHeader(props) {
         </TableCell>
         {headerData.map((header, index) => {
           return (
-            <TableCell key={index + 1}>
-              <TableSortLabel>{header}</TableSortLabel>
+            <TableCell
+              sortDirection={orderBy === headerData[index] ? order : false}
+              align="right"
+              padding="normal"
+              key={index}
+            >
+              <TableSortLabel
+                onClick={(e) => onRequestSort(e, headerData[index])}
+                direction={orderBy === headerData[index] ? order : "asc"}
+                active={orderBy === headerData[index]}
+              >
+                {header}
+                {orderBy === headerData[index] ? (
+                  <span className={classes.visuallyHidden}>
+                    {order === "desc"
+                      ? "sorted descending"
+                      : "sorted ascending"}
+                  </span>
+                ) : null}
+              </TableSortLabel>
             </TableCell>
           );
         })}

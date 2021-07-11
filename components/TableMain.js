@@ -128,7 +128,7 @@ function TableMain() {
           >
             <TableHeader
               classes={classes}
-              selected={selected.length}
+              numSelected={selected.length}
               order={order}
               orderBy={orderBy}
               headerData={headerData}
@@ -136,14 +136,31 @@ function TableMain() {
               onRequestSort={onRequestSort}
               rowCount={bodyData.length}
             />
+            <TableBodyComponent
+              page={page}
+              rowsPerPage={rowsPerPage}
+              bodyData={bodyData}
+              selected={selected}
+              setSelected={setSelected}
+              order={order}
+              orderBy={orderBy}
+            />
           </Table>
-          <TableBodyComponent
-            page={page}
-            rowsPerPage={rowsPerPage}
-            bodyData={bodyData}
-            selected={selected}
-          />
         </TableContainer>
+        <TablePagination
+          onRowsPerPageChange={(e) => {
+            setRowsPerPage(parseInt(e.target.value, 10));
+            setPage(0);
+          }}
+          onPageChange={(e, newPage) => {
+            setPage(newPage);
+          }}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          component="div"
+          count={bodyData.length}
+          rowsPerPageOptions={[6, 10]}
+        />
       </Paper>
     </div>
   );
